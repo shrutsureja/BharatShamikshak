@@ -1,2 +1,3 @@
-# LLM-APP
-Hackathon project 2023 LLM-APP
+#rag-privategpt-v1
+
+1. enter the model path in the .env
