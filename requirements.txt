@@ -1,0 +1,7 @@
+tiktoken
+chromadb
+langchain
+textract
+llama-cpp-python
+pypdf
+python-dotenv
