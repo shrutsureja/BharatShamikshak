@@ -17,7 +17,7 @@ const ChatInterface = () => {
       setMessages(newMessages);
       setInputMessage('');
 
-    // idhar chatbot / model response ka logic 
+      // Simulate a chatbot response (you can replace this with actual logic)
       setTimeout(() => {
         const chatbotResponse = 'This is a chatbot response.';
         const updatedMessages = [...newMessages, { text: chatbotResponse, isUser: false }];
@@ -46,19 +46,18 @@ const ChatInterface = () => {
     <div
       className={`h-screen ${
         isDarkMode
-          ? 'bg-gradient-to-b from-gray-900 to-gray-800 text-white'
+          ? 'bg-gradient-to-b from-black to-gray-900 text-white'
           : 'bg-gray-100 text-black'
       } flex flex-col`}
     >
       <div className="flex-1 flex">
         <div
           className={`w-1/4 p-4 ${
-            isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+            isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
           } transition-all`}
         >
           {/* Profile Section */}
           <div className="p-4">
-            {/* ... Profile section content ... */}
             <h1>Dev Sanghvi</h1>
           </div>
           {/* Document Upload Section */}
@@ -95,7 +94,6 @@ const ChatInterface = () => {
                 >
                   Sem 6
                 </button>
-               
               </div>
               <div className="flex flex-col space-y-3">
                 {uploadedFiles
@@ -104,7 +102,7 @@ const ChatInterface = () => {
                     <div
                       key={index}
                       className={`${
-                        isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+                        isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
                       } p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover:bg-gray-600`}
                     >
                       <div>
@@ -129,7 +127,7 @@ const ChatInterface = () => {
         <div
           className={`w-3/4 p-4 ${
             isDarkMode
-              ? 'bg-gradient-to-b from-gray-800 to-gray-700'
+              ? 'bg-gradient-to-b from-black to-gray-900'
               : 'bg-white'
           }`}
         >
@@ -142,7 +140,7 @@ const ChatInterface = () => {
               onClick={toggleDarkMode}
               className={`${
                 isDarkMode
-                  ? 'bg-gray-700 hover:bg-gray-600'
+                  ? 'bg-blue-800 hover:bg-blue-700'
                   : 'bg-gray-200 hover-bg-gray-300'
               } px-3 py-1 rounded-full ml-2 transition-all`}
             >
@@ -152,14 +150,14 @@ const ChatInterface = () => {
           {/* Chat History */}
           <div
             className={`flex-1 overflow-y-scroll p-4 ${
-              isDarkMode ? 'text-gray-300' : 'text-black'
+              isDarkMode ? 'text-white' : 'text-black'
             }`}
           >
             {messages.map((message, index) => (
               <div key={index} className={`mb-4 ${message.isUser ? 'text-right' : 'text-left'}`}>
                 <div
                   className={`${
-                    isDarkMode ? 'bg-gray-700' : 'bg-gray-200'
+                    isDarkMode ? 'bg-gray-900' : 'bg-gray-200'
                   } p-3 rounded-lg flex justify-between items-center transition-all cursor-pointer hover-bg-gray-600`}
                 >
                   <div>
@@ -177,7 +175,7 @@ const ChatInterface = () => {
           {/* Message Input Section */}
           <div
             className={`py-4 ${
-              isDarkMode ? 'bg-gradient-to-t from-gray-800 to-gray-700' : 'bg-white'
+              isDarkMode ? 'bg-gradient-to-t from-black to-gray-900' : 'bg-white'
             } flex justify-between items-center transition-all`}
           >
             <input
@@ -186,7 +184,7 @@ const ChatInterface = () => {
               value={inputMessage}
               onChange={(e) => setInputMessage(e.target.value)}
               className={`w-3/4 p-3 m-3 rounded-full border ${
-                isDarkMode ? 'bg-gray-700' : 'bg-gray-100'
+                isDarkMode ? 'bg-gray-900' : 'bg-gray-100'
               } ${
                 isDarkMode ? 'text-white' : 'text-black'
               } focus:outline-none focus:ring-2 focus:ring-blue-400 transition-all`}
