@@ -2,6 +2,7 @@ from ragFunction import rag as rag_function
 # from GenerateQuestion import generateQuestion
 from load_document import ingestDocument
 from chatLLM import chat as chat_function
+from llmload import load as load_function
 
 from flask_ngrok import run_with_ngrok
 from flask import Flask, render_template,request,jsonify

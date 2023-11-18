@@ -1,4 +1,4 @@
-from llmload import LoadLLM
+from llmload import llm
 from embeddingsload import LoadEmbeddings
 
 from langchain.chains import RetrievalQA
@@ -15,7 +15,6 @@ if not load_dotenv():
     exit(1)
 
 persist_directory = os.environ.get('PERSIST_DIRECTORY')
-device_type = os.environ.get('DEVICE_TYPE')
 model_n_ctx = os.environ.get('MODEL_N_CTX')
 model_n_batch = int(os.environ.get('MODEL_N_BATCH',8))
 target_source_chunks = int(os.environ.get('TARGET_SOURCE_CHUNKS',4))
@@ -30,16 +29,9 @@ def rag(query : str) -> str:
     retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
     # activate/deactivate the streaming StdOut callback for LLMs
     callbacks = [StreamingStdOutCallbackHandler()]
-
-    match device_type:
-        case "CPU":
-            llm = LoadLLM(n_ctx=model_n_ctx, n_batch=model_n_batch, callbacks=callbacks, verbose=False)
-        case "GPU":
-            llm = LoadLLM(n_ctx=model_n_ctx, n_batch=model_n_batch, callbacks=callbacks, verbose=False ,n_gpu_layers = 90)
-        case _default:
-            # raise exception if model_type is not supported
-            raise Exception(f"Divice type {device_type} is not supported. Please choose one of the following: CPU , GPU ")
-    qa = RetrievalQA.from_chain_type(llm=llm, chain_type="stuff", retriever=retriever, return_source_documents= True)
+    llmhere = llm(model_n_ctx=model_n_ctx, model_n_batch=model_n_batch, callbacks=callbacks)
+    qa = RetrievalQA.from_chain_type(llm=llmhere, chain_type="stuff", retriever=retriever, return_source_documents= True)
+    print("\nLLMhere : ",llmhere)
     # map reduce to get the best answer
     start = time.time()
     res = qa(query)
