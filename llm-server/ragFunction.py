@@ -1,10 +1,12 @@
-from llmload import llm
+# from llmload import llm
 from embeddingsload import LoadEmbeddings
 
 from langchain.chains import RetrievalQA
 from langchain.callbacks.streaming_stdout import StreamingStdOutCallbackHandler
 from langchain.vectorstores import Chroma
 import chromadb
+from langchain.llms import LlamaCpp
+
 
 from dotenv import load_dotenv
 import os
@@ -18,6 +20,7 @@ persist_directory = os.environ.get('PERSIST_DIRECTORY')
 model_n_ctx = os.environ.get('MODEL_N_CTX')
 model_n_batch = int(os.environ.get('MODEL_N_BATCH',8))
 target_source_chunks = int(os.environ.get('TARGET_SOURCE_CHUNKS',4))
+model_path = os.environ.get('MODEL_PATH')
 
 from constants import CHROMA_SETTINGS
 from sklearn.metrics.pairwise import cosine_similarity as cos_sim
@@ -29,7 +32,8 @@ def rag(query : str) -> str:
     retriever = db.as_retriever(search_kwargs={"k": target_source_chunks})
     # activate/deactivate the streaming StdOut callback for LLMs
     callbacks = [StreamingStdOutCallbackHandler()]
-    llmhere = llm(model_n_ctx=model_n_ctx, model_n_batch=model_n_batch, callbacks=callbacks)
+    # llmhere = llm(model_n_ctx=model_n_ctx, model_n_batch=model_n_batch, callbacks=callbacks)
+    llmhere = LlamaCpp(model_path=model_path,n_gpu_layers = 90,model_n_ctx=model_n_ctx, model_n_batch=model_n_batch, callbacks=callbacks)
     qa = RetrievalQA.from_chain_type(llm=llmhere, chain_type="stuff", retriever=retriever, return_source_documents= True)
     print("\nLLMhere : ",llmhere)
     # map reduce to get the best answer
