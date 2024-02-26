@@ -1,6 +1,7 @@
 # LLM-APP
 
-Welcome to the LLM-APP project!
+## The Project is Under Development yet
+Welcome to the LLM-APP project!    
 
 ## Table of Contents
 - [Introduction](#introduction)
