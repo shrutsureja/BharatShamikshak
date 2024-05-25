@@ -11,7 +11,7 @@ const ChatInterface = () => {
   const [selectedSemester, setSelectedSemester] = useState(null);
   const [selectedSubject, setSelectedSubject] = useState(null);
   const [loader, setLoader] = useState(false);
-  const baseUrl = "https://3173-34-136-84-152.ngrok-free.app";
+  const baseUrl = "https://d8f2-34-136-84-152.ngrok-free.app";
   const toggleDarkMode = () => {
     setIsDarkMode(!isDarkMode);
   };

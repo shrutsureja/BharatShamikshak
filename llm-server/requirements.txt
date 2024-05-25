@@ -1,5 +1,4 @@
-pyngrok==4.1.1
-flask_ngrok
+pyngrok
 flask-cors
 langchain==0.0.274
 gpt4all==1.0.8
